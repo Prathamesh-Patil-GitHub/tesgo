@@ -2,8 +2,8 @@ import { promptGemini } from "../Utils/gemini.js";
 
 export const generateTestParagraph =  async (req, res) => {
 
-    const paragraphTopics = req.body["paragraph-topics"];
-    const containsFeedback = req.body["contains-feedback"];
+    const paragraphTopics = req.body["paragraph_topics"];
+    const containsFeedback = req.body["contains_feedback"];
     const feedback = req.body["feedback"];
     
     let prompt = `Generate an educational paragraphs of 50 lines, on the given topics.
@@ -42,20 +42,19 @@ export const generateTestQuestions =  async (req, res) => {
     
     const paragraph = req.body["paragraph"];
     const no_of_questions =req.body["no_of_questions"];
-    console.log(paragraph,no_of_questions);
 
-    let prompt = `Generate an educational test of ${no_of_questions} MCQ questions with one correct answers.
-    Instructions to generate the questions are as follows:
-    1.The form of questions should be JSON and parsable
-    2.Don't add any extra characters to the question
-    3.Dont make mistakes in generating the correct answer for the MCQ Question
-    4.Make sure the reponse you give should be in the format that would be parsable by a json parser
-    5.Dont use 3 back ticks in response
-    Use the below paragraph for generating the question: ${paragraph}`;
+    // let prompt = `Generate an educational test of ${no_of_questions} MCQ questions with one correct answers.
+    // Instructions to generate the questions are as follows:
+    // 1.The form of questions should be JSON and parsable
+    // 2.Don't add any extra characters to the question
+    // 3.Dont make mistakes in generating the correct answer for the MCQ Question
+    // 4.Make sure the reponse you give should be in the format that would be parsable by a json parser
+    // 5.Dont use 3 back ticks in response
+    // Use the below paragraph for generating the question: ${paragraph}`;
 
-//     let prompt=`{
-//   "paragraph": ${paragraph},  "instruction": "Generate multiple choice questions (MCQs) in JSON data object that is array of questions format based on the provided paragraph. Each question should have the following structure: {'question': 'The question itself', 'options': ['Option 1', 'Option 2', 'Option 3', 'Option 4'], 'answer': 'The correct answer'}.",
-//   "num_questions": ${no_of_questions} } dont use 3 back tics and make sure json parser should be able to parse the response`
+    let prompt=`{
+  "paragraph": ${paragraph},  "instruction": "Generate multiple choice questions (MCQs) in JSON data object that is array of questions format based on the provided paragraph. Each question should have the following structure: {'question': 'The question itself', 'options': ['Option 1', 'Option 2', 'Option 3', 'Option 4'], 'answer': 'The correct answer'}.",
+  "num_questions": ${no_of_questions} } dont use 3 back tics and make sure json parser should be able to parse the response`
     
 try{
         const promptResponse = await promptGemini(prompt);
@@ -74,5 +73,5 @@ try{
         console.log("Log: Generate Test Questions: Error - Gemini error occured")
     }
 
-    console.log("Log: Generate Test Paragraph: Request Successful")
+    console.log("Log: Generate Test Questions: Request Successful")
 };
