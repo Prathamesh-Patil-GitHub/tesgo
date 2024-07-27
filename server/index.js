@@ -1,31 +1,4 @@
-// import { promptGemini } from "./Utils/gemini.js";
-// import express from "express";
-// const app = express();
-// import { configDotenv } from "dotenv";
-// import cors from 'cors';
-// configDotenv();
-
-// // Initializations
-// const port = process.env.PORT;
-// app.use(express.json());
-// app.use(cors());
-
-// // Routes
-// import {geminiRouter} from "./Routes/GeminiRoutes.js"
-// app.use("/gemini", geminiRouter)
-
-
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
-
-// index.js
 import express from 'express';
-import { promptGemini } from "./Utils/gemini.js";
 import { configDotenv } from "dotenv";
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -48,10 +21,10 @@ import { geminiRouter } from "./Routes/GeminiRoutes.js";
 import { userRouter } from "./Routes/UserRoutes.js";
 
 app.use("/gemini", geminiRouter);
-app.use('/api', userRouter);
+app.use('/auth', userRouter);
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/userdb', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://prathamesh:prathamesh@ac-rovb9yg-shard-00-00.9fh8spg.mongodb.net:27017,ac-rovb9yg-shard-00-01.9fh8spg.mongodb.net:27017,ac-rovb9yg-shard-00-02.9fh8spg.mongodb.net:27017/tesgo?ssl=true&replicaSet=atlas-w4n73x-shard-0&authSource=admin&retryWrites=true&w=majority')
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
